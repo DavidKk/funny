@@ -16,7 +16,13 @@ module.exports = function(grunt) {
   grunt.initConfig({
     assetsPath  : 'src',
     destPath    : 'dist',
-    buildPath   : 'build'
+    buildPath   : 'build',
+
+    watch: {
+      options : {
+        nospawn : true
+      }
+    }
   })
 
   grunt.registerTask('init', function(proName) {
@@ -56,8 +62,8 @@ module.exports = function(grunt) {
     })
 
     grunt.config('watch.scripts@' + proName, {
-      files: [path.join(assPath, 'scripts/*.js')],
-      tasks: ['es6transpiler.' + proName]
+      files: [path.join(assPath, 'scripts/**/*.js')],
+      tasks: ['es6transpiler:' + proName]
     })
 
     grunt.config('less.' + proName, {
@@ -69,14 +75,14 @@ module.exports = function(grunt) {
     })
 
     grunt.config('watch.styles@' + proName, {
-      files: [path.join(assPath, 'styles/*.js')],
-      tasks: ['less.' + proName]
+      files: [path.join(assPath, 'styles/**/*.less')],
+      tasks: ['less:' + proName]
     })
 
     grunt.config('jade.' + proName, {
         dest    : path.join(dstPath, 'templates'),
         cwd     : path.join(assPath, 'templates'),
-        src     : '*.jade',
+        src     : '**/*.jade',
         expand  : true,
         ext     : '.html'
     })
@@ -88,10 +94,10 @@ module.exports = function(grunt) {
 
     grunt.config('watch.templates@' + proName, {
       files: [path.join(assPath, 'templates/*.jade'), path.join(assPath, 'index.jade')],
-      tasks: ['jade.' + proName, 'jade.index@' + proName]
+      tasks: ['jade:' + proName, 'jade:index@' + proName]
     })
 
-    grunt.task.run(['clean:' + proName, 'es6transpiler', 'less', 'jade'])
+    grunt.task.run(['clean:' + proName, 'es6transpiler', 'less', 'jade', 'watch'])
   })
 
   grunt.registerTask('default', ['build'])

@@ -1,0 +1,48 @@
+
+.fixed-center {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+
+#mushroom {
+  @size         : 250px;
+  @red          : #e72c21;
+  @red-dark     : #7f2c1e;
+
+  @yellow       : #f3d892;
+
+  display: block;
+  width: @size;
+  height: @size;
+
+  @star-width: 125px;
+  @star-height: 115px;
+
+  &:before {
+    display: block;
+    margin: 0 auto;
+    width: @size;
+    height: percentage(203/@size);
+    content: "";
+    background-image:
+      radial-gradient(circle at 50% 33%, #fff 32%, rgba(255,255,255,0) 32%),
+      radial-gradient(circle at -13% 55%, #f8f6f7 20%, rgba(255,255,255,0) 20%),
+      radial-gradient(circle at 113% 55%, #f8f6f7 20%, rgba(255,255,255,0) 20%),
+      linear-gradient(to bottom, @red 0, @red-dark 100%);
+    border-radius: 140px 140px 80px 80px;
+  }
+
+  &:after {
+    display: block;
+    margin: 0 auto;
+    margin-top: percentage(46/@size) * -1;
+    width: percentage(154/@size);
+    height: percentage(87/@size);
+    background-image: linear-gradient(to bottom, @yellow, @yellow);
+    content: "";
+  }
+}
