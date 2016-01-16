@@ -1,0 +1,22 @@
+{
+  "name": "funny",
+  "description": "",
+  "main": "",
+  "authors": [
+    "davidjones"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/DavidKk/funny",
+  "moduleType": [],
+  "private": true,
+  "package": {
+    "lesshat": "^3.0.2"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
