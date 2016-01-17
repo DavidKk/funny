@@ -1,0 +1,234 @@
+.clearfix() {
+  &:before,
+  &:after {
+    content: ' ';
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.user-select(...) {
+  @process: ~`(function(e){return e=e||"auto"})((function(){var e="@{arguments}";return e=e.replace(/^\[|\]$/g,"")})())`;
+  -webkit-user-select: @process;
+  -moz-user-select: @process;
+  -ms-user-select: @process;
+  user-select: @process;
+}
+
+.transition(...) {
+  @process_webkit: ~`(function(e){e=e||"all 0 ease 0";var r=["background-size","border-radius","border-bottom-left-radius","border-bottom-right-radius","border-top-left-radius","border-top-right-radius","box-shadow","column","transform","filter"],t="-webkit-",n=/(?:\d)(?:ms|s)/gi,a=/(?:\s|^)(\.?\d+\.?\d*)(?![^(]*\)|\w|%)/gi;return/^[^, ]*,/.test(e)&&(e=e.replace(/(?:,)(?![^(]*\))/g,"")),r.forEach(function(r){-1!==e.indexOf(r)&&(e=e.replace(new RegExp(r,"g"),function(e){return t+e}))}),n.test(e)||"0"===e||(e=e.replace(a,function(e){return e+=parseFloat(e,10)>10?"ms":"s"})),e})((function(){var e="@{arguments}";return e=e.replace(/^\[|\]$/g,"")})())`;
+  @process_moz: ~`(function(e){e=e||"all 0 ease 0";var r=["background-size","box-shadow","column","transform","filter"],t="-moz-",n=/(?:\d)(?:ms|s)/gi,a=/(?:\s|^)(\.?\d+\.?\d*)(?![^(]*\)|\w|%)/gi;return/^[^, ]*,/.test(e)&&(e=e.replace(/(?:,)(?![^(]*\))/g,"")),r.forEach(function(r){-1!==e.indexOf(r)&&(e=e.replace(new RegExp(r,"g"),function(e){return t+e}))}),n.test(e)||"0"===e||(e=e.replace(a,function(e){return e+=parseFloat(e,10)>10?"ms":"s"})),e})((function(){var e="@{arguments}";return e=e.replace(/^\[|\]$/g,"")})())`;
+  @process_opera: ~`(function(e){e=e||"all 0 ease 0";var r=["transform"],t="-o-",n=/(?:\d)(?:ms|s)/gi,a=/(?:\s|^)(\.?\d+\.?\d*)(?![^(]*\)|\w|%)/gi;return/^[^, ]*,/.test(e)&&(e=e.replace(/(?:,)(?![^(]*\))/g,"")),r.forEach(function(r){-1!==e.indexOf(r)&&(e=e.replace(new RegExp(r,"g"),function(e){return t+e}))}),n.test(e)||"0"===e||(e=e.replace(a,function(e){return e+=parseFloat(e,10)>10?"ms":"s"})),e})((function(){var e="@{arguments}";return e=e.replace(/^\[|\]$/g,"")})())`;
+  @process: ~`(function(e){e=e||"all 0 ease 0";var r=["-webkit-","-moz-","-o-",""],t=["column","transform","filter"],n=/(?:\d)(?:ms|s)/gi,a=/(?:\s|^)(\.?\d+\.?\d*)(?![^(]*\)|\w|%)/gi;/^[^, ]*,/.test(e)&&(e=e.replace(/(?:,)(?![^(]*\))/g,""));var c=e.split(/(?:,)(?![^(]*\))/g);return c.forEach(function(e,n){t.forEach(function(t){-1!==e.indexOf(t)&&(c[n]="",r.forEach(function(a,u){c[n]+=e.trim().replace(new RegExp(t,"g"),function(e){return a+e}),u<r.length-1&&(c[n]+=",")}))})}),e=c.join(","),n.test(e)||"0"===e||(e=e.replace(a,function(e){return e+=parseFloat(e,10)>10?"ms":"s"})),e})((function(){var e="@{arguments}";return e=e.replace(/^\[|\]$/g,"")})())`;
+  -webkit-transition: @process_webkit;
+  -moz-transition: @process_moz;
+  -o-transition: @process_opera;
+  transition: @process;
+}
+
+@error:     #f62459;
+@success:   #00bf90;
+@gray:      #c1c1c1;
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  vertical-align: baseline;
+  color: #333;
+  font-size: 16px;
+  font-family: Calibri,Helvetica,Arial,sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+[role="button"] {
+  cursor: pointer;
+}
+
+.qrcode-maker {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+
+  .block {
+    margin-bottom: 15px;
+  }
+
+  .clearfix {
+    .clearfix();
+  }
+
+  .form-control {
+    display: block;
+    width: 100%;
+    border: 1px solid #c1c1c1;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px 14px;
+    resize: none;
+
+    :focus {
+      outline: none;
+    }
+  }
+
+  .btn {
+    margin: 0;
+    padding: 10px;
+    min-height: 48px;
+    border: none;
+    border-radius: 4px;
+    border-bottom: 4px solid #999;
+    width: 100%;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    background: #bbb;
+    cursor: pointer;
+    outline: none;
+    .user-select(none);
+    .transition(all .2s ease);
+  }
+
+  .btn-success {
+    background-color: @success;
+    border-bottom: 4px solid darken(@success, 10%);
+
+    &:hover,
+    &:active {
+      background: darken(@success, 9%);
+    }
+  }
+
+  .btn-error {
+    background-color: @error;
+    border-bottom: 4px solid darken(@error, 15%);
+
+    &:hover,
+    &:active {
+      background: darken(@error, 9%);
+    }
+  }
+
+  .dropbox {
+    position: relative;
+  }
+
+  .dropbox .qrcode-truth {
+    position: absolute;
+    top: -100000px;
+    left: -100000px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+
+  .dropbox > .dropbox-filed {
+    display: block;
+    position: relative;
+    border: 3px dashed @gray;
+    border-radius: 4px;
+    padding: 80px;
+    text-align: center;
+    .user-select(none);
+    .transition(border-color .25s);
+
+    .dropbox-filed-text {
+      color: #999;
+      font-size: 2.2rem;
+      .transition(color .25s);
+    }
+
+    input[type=file] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      outline: none;
+      opacity: 0;
+      cursor: pointer;
+    }
+  
+    &.dragging,
+    &:hover {
+      border-color: darken(@gray, 20%);
+      
+      .dropbox-text {
+        color: #777;
+      }
+    }
+  }
+
+  .dropbox > .dropbox-loading {
+
+  }
+
+  .dropbox > .dropbox-content {
+    width: 100%;
+    display: none;
+
+    .upload-content-image {
+      display: block;
+      position: relative;
+      margin: 0 auto;
+      margin-bottom: 15px;
+      border: 0;
+      width: 100%;
+      max-width: 100%;
+      min-height: 200px;
+      border: 0;
+      outline: none;
+      vertical-align: middle;
+      .user-select(none);
+
+      &:after {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        width: 100%;
+        min-height: 200px;
+        line-height: 200px;
+        text-align: center;
+        vertical-align: middle;
+        color: #aaa;
+        font-size: 1.8rem;
+        font-weight: bolder;
+        box-shadow: 0 0 1px @gray;
+        content: "Upload Error";
+      }
+    }
+  }
+
+  header {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    padding: 40px 0;
+
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+    }
+  }
+
+  footer {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    text-align: right;
+  }
+}

@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no')
+    link(rel='stylesheet', href='styles/index.css')
+    title QRCode & Image Maker
+    script(src='vendor/zepto.min.js')
+    script(src='vendor/index.js')
+  body
+    section.qrcode-maker
+      header
+        h1 QRCode & Image Maker
+      form.upload-form
+        #qrcodeDropbox.dropbox.clearfix
+          .dropbox-filed.block.clearfix.uploading(data-dropbox='dragndrop')
+            h1.dropbox-filed-text Drop files here
+            h2.dropbox-filed-text Or click here to upload
+            input(data-dropbox='file', type='file', accept='image/*')
+          .dropbox-loading(data-dropbox='loading')
+          .dropbox-content.block.clearfix(data-dropbox='content')
+            #qrcode.qrcode-truth
+            canvas#preview.upload-content-image(data-dropbox='preview')
+            button.btn.btn-error(data-dropbox='destory', type='button', role='button') Remove Image
+        .block.clearfix
+          input#qrcodeUrl.form-control(type='url', value='http://www.baidu.com', placeholder='http://')
+        .block.clearfix
+          input#qrcodeSize.form-control(type='number', value='100', placeholder='Please enter the qrcode size')
+        .block.clearfix
+          textarea#qrcodeBase64.form-control(disabled='', placeholder='data:image/png;base64')
+        .block.clearfix
+          button#qrcodeDownload.btn.btn-success(type='button', role='button') Generate & Download
+      footer
+        p Build by DavidJones

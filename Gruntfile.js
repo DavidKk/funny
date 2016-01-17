@@ -54,6 +54,18 @@ module.exports = function(grunt) {
 
     grunt.config('clean.' + proName, dstPath)
 
+    grunt.config('copy.' + proName, {
+        dest    : path.join(dstPath, 'vendor'),
+        cwd     : path.join(assPath, 'vendor'),
+        src     : '*',
+        expand  : true
+    })
+
+    grunt.config('watch.copy@' + proName, {
+      files: [path.join(assPath, 'vendor/*')],
+      tasks: ['copy:' + proName]
+    })
+
     grunt.config('es6transpiler.' + proName, {
         dest    : path.join(dstPath, 'scripts'),
         cwd     : path.join(assPath, 'scripts'),
@@ -97,7 +109,7 @@ module.exports = function(grunt) {
       tasks: ['jade:' + proName, 'jade:index@' + proName]
     })
 
-    grunt.task.run(['clean:' + proName, 'es6transpiler', 'less', 'jade', 'watch'])
+    grunt.task.run(['clean:' + proName, 'copy', 'es6transpiler', 'less', 'jade', 'watch'])
   })
 
   grunt.registerTask('default', ['build'])
